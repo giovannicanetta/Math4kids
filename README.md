@@ -44,6 +44,12 @@ Render the whole story as a single video:
 Videos land in `media/videos/...`, with an `.srt` subtitle file of the narration
 next to each one.
 
+For a file to share and play in QuickTime (H.264 + AAC, faststart):
+
+```bash
+./export_quicktime.sh PowersAndLogs.mov
+```
+
 ## Chapters
 
 | File | Scene | Content |
