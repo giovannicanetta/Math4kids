@@ -1,0 +1,3 @@
+manim==0.19.1
+manim-voiceover[gtts]==0.3.7
+setuptools<81
