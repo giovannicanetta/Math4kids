@@ -50,6 +50,9 @@ For a file to share and play in QuickTime (H.264 + AAC, faststart):
 ./export_quicktime.sh PowersAndLogs.mov
 ```
 
+A rendered copy (1080p60, ~16.5 min) is committed at
+[`renders/PowersAndLogs.mov`](renders/PowersAndLogs.mov).
+
 ## Chapters
 
 | File | Scene | Content |
