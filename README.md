@@ -54,6 +54,9 @@ next to each one.
 | `scenes/scene_02_adding_presses.py` | `AllTheTwos` | (2x2x2)x(2x2) = 2x2x2x2x2 |
 | `scenes/scene_03_logs_undo.py` | `LogIsTheUndoButton` | the log as the undo button, 5 = 3 + 2 |
 | `scenes/scene_03_logs_undo.py` | `WhyHartleyUsedLogs` | combining messages: possibilities multiply, bits add |
+| `scenes/scene_06_messages.py` | `WhatPossibilitiesMean` | 8 doors vs 4 weathers: what "possibilities" counts, log 1 = 0 |
+| `scenes/scene_06_messages.py` | `BitsAndCodes` | door codes 000..111, weather codes 00..11, k bits label 2^k |
+| `scenes/scene_06_messages.py` | `SendingBothMessages` | both notes: 8 x 4 = 32 combos, 010 + 10 = 01010, the caveat |
 | `scenes/scene_04_what_is_a_log.py` | `WhatIsALog` | "how many times do I multiply by 2?" |
 | `scenes/scene_04_what_is_a_log.py` | `CuttingInHalf` | pizza 16 -> 8 -> 4 -> 2 -> 1 |
 | `scenes/scene_05_guessing_game.py` | `GuessingGame` | yes/no questions over 16, 32, 1024 numbers |

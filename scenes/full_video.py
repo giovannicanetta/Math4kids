@@ -8,6 +8,7 @@ from scene_02_adding_presses import AddingPresses, AllTheTwos
 from scene_03_logs_undo import LogIsTheUndoButton, WhyHartleyUsedLogs
 from scene_04_what_is_a_log import CuttingInHalf, WhatIsALog
 from scene_05_guessing_game import GuessingGame, LogsAndDigits
+from scene_06_messages import BitsAndCodes, SendingBothMessages, WhatPossibilitiesMean
 
 CHAPTERS = [
     Intro,
@@ -16,6 +17,9 @@ CHAPTERS = [
     AllTheTwos,
     LogIsTheUndoButton,
     WhyHartleyUsedLogs,
+    WhatPossibilitiesMean,
+    BitsAndCodes,
+    SendingBothMessages,
     WhatIsALog,
     CuttingInHalf,
     GuessingGame,

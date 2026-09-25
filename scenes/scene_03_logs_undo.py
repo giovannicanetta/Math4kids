@@ -93,20 +93,22 @@ class WhyHartleyUsedLogs(StoryScene):
             heading = write_title(self, "Why Hartley used the log")
 
         left = VGroup(
-            body("Message A", size=28, color=SOFT),
+            body("Message A: which door", size=28, color=SOFT),
             MathTex(r"8 \text{ possibilities}", color=ACCENT, font_size=40),
             MathTex(r"\log_2 8 = 3 \text{ bits}", color=GOOD, font_size=40),
         ).arrange(DOWN, buff=0.35)
         right = VGroup(
-            body("Message B", size=28, color=SOFT),
+            body("Message B: the weather", size=28, color=SOFT),
             MathTex(r"4 \text{ possibilities}", color=ACCENT, font_size=40),
             MathTex(r"\log_2 4 = 2 \text{ bits}", color=GOOD, font_size=40),
         ).arrange(DOWN, buff=0.35)
         VGroup(left, right).arrange(RIGHT, buff=2.0).shift(UP * 1.2)
 
         with self.say(
-            "Message A has eight possibilities, which is three bits. "
-            "Message B has four possibilities, which is two bits."
+            "Message A says which of eight doors hides a treasure: "
+            "eight possibilities, which is three bits. "
+            "Message B says which of four weathers it is: "
+            "four possibilities, which is two bits."
         ):
             self.play(FadeIn(left, shift=UP * 0.2), run_time=0.8)
             self.play(FadeIn(right, shift=UP * 0.2), run_time=0.8)
