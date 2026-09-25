@@ -1,6 +1,6 @@
 """The whole story in one scene, in the order of the text."""
 
-from manim import Scene
+from theme import StoryScene
 
 from scene_00_intro import Intro, Outro
 from scene_01_doubling_box import MagicDoublingBox
@@ -24,8 +24,10 @@ CHAPTERS = [
 ]
 
 
-class PowersAndLogs(Scene):
+class PowersAndLogs(StoryScene):
     def construct(self):
-        for chapter in CHAPTERS:
+        for index, chapter in enumerate(CHAPTERS):
             chapter.construct(self)
             self.clear()
+            if index < len(CHAPTERS) - 1:
+                self.chapter_break()

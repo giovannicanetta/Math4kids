@@ -4,6 +4,12 @@ Manim animations that explain, for kids, why powers turn adding into multiplying
 and why logs turn multiplying back into adding (and why that is what "bits of
 information" means).
 
+Every chapter is narrated: the text is spoken by Google Translate text-to-speech
+via `manim-voiceover`, so rendering needs an internet connection (the generated
+speech is cached under `media/voiceovers/`). Animations run at a quarter speed
+(`SLOWDOWN` in `scenes/theme.py`) and the full video holds a 10 second pause
+between chapters (`CHAPTER_PAUSE`).
+
 ## Setup
 
 System packages (Ubuntu):
@@ -35,7 +41,8 @@ Render the whole story as a single video:
 .venv/bin/manim -qh scenes/full_video.py PowersAndLogs
 ```
 
-Videos land in `media/videos/...`.
+Videos land in `media/videos/...`, with an `.srt` subtitle file of the narration
+next to each one.
 
 ## Chapters
 
@@ -55,4 +62,7 @@ Videos land in `media/videos/...`.
 | `scenes/full_video.py` | `PowersAndLogs` | all chapters in order |
 
 Shared pieces live in `scenes/theme.py` (colors, text helpers, candies, the
-`DoublingBox`) and `scenes/pizza.py`.
+`DoublingBox`, and the narrated `StoryScene` base class) and `scenes/pizza.py`.
+
+To change the pacing, edit `SLOWDOWN` and `CHAPTER_PAUSE` in `scenes/theme.py`.
+Narration lines are the `self.say("...")` blocks inside each chapter.

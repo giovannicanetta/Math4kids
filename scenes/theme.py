@@ -21,7 +21,16 @@ from manim import (
     Write,
     config,
 )
+from contextlib import contextmanager
+
 import numpy as np
+from manim_voiceover import VoiceoverScene
+from manim_voiceover.services.gtts import GTTSService
+
+#: every ``run_time`` and every pause is stretched by this factor
+SLOWDOWN = 4.0
+#: silence held between two chapters of the full video
+CHAPTER_PAUSE = 10.0
 
 BACKGROUND = "#10131f"
 CANDY_PINK = "#ff5d8f"
@@ -167,6 +176,46 @@ class DoublingBox(VGroup):
         scene.play(FadeIn(self.candies, scale=0.5), run_time=0.4)
 
 
+class StoryScene(VoiceoverScene):
+    """Scene with narration, four-times-slower animations and chapter pauses.
+
+    ``self.play`` and ``self.wait`` are stretched by :data:`SLOWDOWN`. Waits
+    that happen while a narration line is being spoken are left alone, so the
+    audio never drifts away from the picture.
+    """
+
+    def setup(self):
+        super().setup()
+        setup_style()
+        self.set_speech_service(GTTSService(lang="en", tld="com"))
+        self._speaking = False
+
+    def play(self, *args, **kwargs):
+        kwargs["run_time"] = kwargs.get("run_time", 1.0) * SLOWDOWN
+        return super().play(*args, **kwargs)
+
+    def wait(self, duration: float = 1.0, **kwargs):
+        if not self._speaking:
+            duration *= SLOWDOWN
+        return super().wait(duration, **kwargs)
+
+    @contextmanager
+    def say(self, text: str):
+        """Speak ``text`` while the animations inside the block are played."""
+        self._speaking = True
+        try:
+            with self.voiceover(text=text) as tracker:
+                yield tracker
+        finally:
+            self._speaking = False
+
+    def chapter_break(self, duration: float = CHAPTER_PAUSE) -> None:
+        """An unscaled pause, used between chapters of the full video."""
+        speaking, self._speaking = self._speaking, True
+        self.wait(duration)
+        self._speaking = speaking
+
+
 def chain(values, color: str = SOFT, size: float = 40) -> VGroup:
     """``1 -> 2 -> 4 -> 8`` written as a row of numbers joined by arrows."""
     parts = VGroup()
@@ -209,7 +258,10 @@ __all__ = [
     "ACCENT",
     "BACKGROUND",
     "BLACK",
+    "CHAPTER_PAUSE",
+    "SLOWDOWN",
     "DoublingBox",
+    "StoryScene",
     "GOOD",
     "SOFT",
     "body",

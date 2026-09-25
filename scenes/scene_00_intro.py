@@ -6,38 +6,44 @@ from manim import (
     FadeIn,
     FadeOut,
     MathTex,
-    Scene,
     VGroup,
     Write,
 )
 
-from theme import ACCENT, GOOD, SOFT, body, setup_style, title, underline
+from theme import ACCENT, GOOD, SOFT, StoryScene, body, title, underline
 
 
-class Intro(Scene):
+class Intro(StoryScene):
     def construct(self):
-        setup_style()
         main = title("Powers turn adding into multiplying", size=48)
         line = underline(main)
         subtitle = body("and logs turn multiplying back into adding", size=32, color=SOFT)
         subtitle.next_to(main, DOWN, buff=0.8)
-
-        self.play(Write(main), run_time=1.8)
-        self.play(FadeIn(line), run_time=0.4)
-        self.play(FadeIn(subtitle, shift=UP * 0.2), run_time=1.0)
-
         hint = MathTex(r"2^{3+2} = 2^3 \times 2^2", color=GOOD, font_size=64)
         hint.next_to(subtitle, DOWN, buff=1.1)
-        self.play(Write(hint), run_time=1.2)
-        self.wait(1.5)
+
+        with self.say("Powers turn adding into multiplying."):
+            self.play(Write(main), run_time=1.8)
+            self.play(FadeIn(line), run_time=0.4)
+
+        with self.say("And logs turn multiplying back into adding."):
+            self.play(FadeIn(subtitle, shift=UP * 0.2), run_time=1.0)
+
+        with self.say(
+            "This is where we are going: two to the three plus two "
+            "equals two cubed times two squared."
+        ):
+            self.play(Write(hint), run_time=1.2)
+            self.wait(0.5)
+
         self.play(FadeOut(VGroup(main, line, subtitle, hint)))
 
 
-class Outro(Scene):
+class Outro(StoryScene):
     def construct(self):
-        setup_style()
         heading = title("Two sides of the same idea").to_edge(UP, buff=0.8)
-        self.play(Write(heading), run_time=1.2)
+        with self.say("Powers and logs are two sides of the same idea."):
+            self.play(Write(heading), run_time=1.2)
 
         cards = VGroup(
             VGroup(
@@ -53,11 +59,21 @@ class Outro(Scene):
         ).arrange(DOWN, buff=1.3)
         cards.move_to(DOWN * 0.3)
 
-        for card in cards:
-            self.play(FadeIn(card, shift=UP * 0.2), run_time=1.0)
+        narration = [
+            "With powers, you add the presses and the candies multiply.",
+            "With logs, you multiply the numbers and the questions add up.",
+        ]
+        for card, line in zip(cards, narration):
+            with self.say(line):
+                self.play(FadeIn(card, shift=UP * 0.2), run_time=1.0)
 
         moral = body("that is why information is measured with a log", size=30, color=ACCENT)
         moral.next_to(cards, DOWN, buff=0.9)
-        self.play(Write(moral), run_time=1.4)
-        self.wait(2.0)
+        with self.say(
+            "And that is why information is measured with a log: "
+            "possibilities multiply, but information simply adds up."
+        ):
+            self.play(Write(moral), run_time=1.4)
+            self.wait(0.5)
+
         self.play(FadeOut(VGroup(heading, cards, moral)))
